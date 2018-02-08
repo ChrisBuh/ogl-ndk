@@ -1,5 +1,6 @@
 package bertrandt.opengl_ndk;
 
+import android.content.Context;
 import android.opengl.GLSurfaceView;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -12,18 +13,37 @@ import static android.opengl.GLES20.*;
  */
 
 public class RendererWrapper implements GLSurfaceView.Renderer {
-    @Override
-    public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
-        JNIWrapper.on_surface_created();
+        static {
+            System.loadLibrary("game");
+        }
+
+        private final Context context;
+
+        public RendererWrapper(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+            PlatformFileUtils.init_asset_manager(context.getAssets());
+            on_surface_created();
+        }
+
+        @Override
+        public void onSurfaceChanged(GL10 gl, int width, int height) {
+            on_surface_changed(width, height);
+        }
+
+        @Override
+        public void onDrawFrame(GL10 gl) {
+            on_draw_frame();
+        }
+
+        private static native void on_surface_created();
+
+        private static native void on_surface_changed(int width, int height);
+
+        private static native void on_draw_frame();
     }
 
-    @Override
-    public void onSurfaceChanged(GL10 gl10, int width, int heigth) {
-        JNIWrapper.on_surface_changed(width,heigth);
-    }
-
-    @Override
-    public void onDrawFrame(GL10 gl10) {
-        JNIWrapper.on_draw_frame();
-    }
 }

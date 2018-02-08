@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OpenGL-NDK.iml" filepath="$PROJECT_DIR$/OpenGL-NDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ogl-ndk.iml" filepath="$PROJECT_DIR$/ogl-ndk.iml" />
     </modules>
   </component>
 </project>
